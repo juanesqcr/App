@@ -3,7 +3,8 @@ const user = require("./user");
 
 const router = express.Router();
 
-export default () => {
+module.exports = function(){
   user(router);
   return router;
 };
+
