@@ -5,6 +5,7 @@ const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const compression = require("compression");
 const cors = require("cors");
+const mongoose = require("mongoose");
 
 const app = express();
 
@@ -32,4 +33,13 @@ server.listen(8080, () => {
 });
 
 // TODO: add the URL to the new server
-const MONGO_URL = '';
+const MONGO_URL = "";
+
+mongoose.Promise = Promise;
+mongoose.connect(MONGO_URL);
+mongoose.connection.on("error", (error) => {
+  console.log(error);
+});
+
+
+app.use("/", router());
