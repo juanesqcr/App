@@ -1,6 +1,6 @@
 const express = require("express");
 const { getUsers, getUserbyEmail, createUser } = require("../db/users");
-const { authentication, random } = require('../helpers/index')
+const { authentication, random } = require("../helpers/index");
 
 const getAllUsers = async (req, res) => {
   try {

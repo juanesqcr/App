@@ -29,7 +29,6 @@ const deleteUserbyId = (id) => UserModel.findByIdAndDelete({ _id: id });
 const updateUserById = (id, values) => UserModel.findByIdAndUpdate(id, values);
 
 module.exports = {
-  UserModel,
   getUsers,
   getUserbyEmail,
   getUserByName,
