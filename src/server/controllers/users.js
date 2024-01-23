@@ -1,5 +1,11 @@
 const express = require("express");
-const { getUsers, getUserbyEmail, createUser } = require("../db/users");
+const {
+  getUsers,
+  getUserbyEmail,
+  createUser,
+  deleteUserbyId,
+  getUserById,
+} = require("../db/users");
 const { authentication, random } = require("../helpers/index");
 
 const getAllUsers = async (req, res) => {
@@ -29,9 +35,10 @@ const register = async (req, res) => {
     }
 
     const existingUser = await getUserbyEmail(email);
+    //TODO: hacer que el correo sea unico
 
     if (existingUser) {
-      return res.sendStatus(400);
+      return res.sendStatus(406);
     }
 
     const salt = random();
@@ -54,4 +61,28 @@ const register = async (req, res) => {
   }
 };
 
-module.exports = { getAllUsers, register };
+const deleteUser = async (req, res) => {
+  try {
+    const { id } = req.body;
+    if (!id) {
+      return res.sendStatus(400);
+    }
+
+    const existingId = await getUserById(id);
+
+    if (!existingId) {
+      console.warn("User doesn't exist");
+      return res.sendStatus(404).json("User doesn't exist");
+    }
+
+    const deleteUser = await deleteUserbyId(id);
+    return res.status(200).json({ message: 'User deleted successfully' });
+  } catch (error) {
+    console.error(error);
+    return res.sendStatus(500);
+  }
+};
+
+//TODO: UPDATE USERS
+
+module.exports = { getAllUsers, register, deleteUser };

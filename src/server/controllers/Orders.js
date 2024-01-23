@@ -2,15 +2,15 @@ const express = require("express");
 const {
   getOrders,
   createOrder,
-  getOrderById,
   getOrderByTrackingNumber,
+  deleteOrderByTrackingNumber,
 } = require("../db/order");
 const { getUserById } = require("../db/users");
+const { ReturnDocument } = require("mongodb");
 
 const getAllOrders = async (req, res) => {
   try {
     const orders = await getOrders();
-    console.info("all orders");
     return res.status(200).json(orders);
   } catch (error) {
     console.error(error);
@@ -30,6 +30,9 @@ const registerOrder = async (req, res) => {
     }
 
     const existingUser = await getUserById(userId);
+    if (!existingUser) {
+      return res.status(404).json({ message: "user not found" });
+    }
 
     const existingOrder = await getOrderByTrackingNumber(trackingNumber);
     if (existingOrder) {
@@ -54,23 +57,47 @@ const registerOrder = async (req, res) => {
 };
 
 const findByTrackingNumber = async (req, res) => {
-try {
-  const { trackingNumber } = req.body;
+  try {
+    const { trackingNumber } = req.body;
 
-  if (!trackingNumber) {
-    return res.sendStatus(404);
+    if (!trackingNumber) {
+      return res.sendStatus(404);
+    }
+    const order = await getOrderByTrackingNumber(trackingNumber);
+    if (!order) {
+      return res.sendStatus(404);
+    }
+    return res.status(200).json(order).end();
+  } catch (error) {
+    console.log(error);
+    return res.sendStatus(500);
   }
-  const order = await getOrderByTrackingNumber(trackingNumber);
-  if (!order) {
-    return res.sendStatus(404);
-  }
-  return res.status(200).json(order).end();
-} catch (error) {
-  console.log(error);
-  return res.sendStatus(500);
-}
-
- 
 };
 
-module.exports = { getAllOrders, registerOrder, findByTrackingNumber };
+const deleteOrder = async (req, res) => {
+  try {
+    const { trackingNumber } = req.body;
+    if (!trackingNumber) {
+      console.log("Order doesn't exist");
+      return res.sendStatus(404);
+    }
+    const existingOrder = await getOrderByTrackingNumber(trackingNumber);
+    if (!existingOrder) {
+      console.log("Order doesn't exist");
+      return res.sendStatus(404);
+    }
+    const deleteOrder = await deleteOrderByTrackingNumber(trackingNumber);
+    return res.status(200).json({ message: "Order deleted" });
+  } catch (error) {
+    console.log(error);
+    return res.sendStatus(500);
+  }
+};
+//TODO: UPDATE ORDERS
+
+module.exports = {
+  getAllOrders,
+  registerOrder,
+  findByTrackingNumber,
+  deleteOrder,
+};

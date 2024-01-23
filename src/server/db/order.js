@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-
+//TODO: Falta agregar que si fue pagado y el precio
 const Orderschema = new mongoose.Schema({
   user: [{ type: mongoose.Schema.Types.ObjectId, ref: "User", required: true }],
   description: { type: String, required: true },
@@ -18,6 +18,8 @@ const createOrder = async (orderData) => {
   return order;
 };
 const deleteOrderById = (id) => ordersModel.findByIdAndDelete({ _id: id });
+const deleteOrderByTrackingNumber = (trackingNumber) =>
+  ordersModel.findOneAndDelete(trackingNumber);
 const updateOrderById = (id, values) =>
   ordersModel.findByIdAndUpdate(id, values, { new: true });
 const getOrdersByUser = (userId) =>
@@ -33,4 +35,5 @@ module.exports = {
   updateOrderById,
   getOrdersByUser,
   getOrderByTrackingNumber,
+  deleteOrderByTrackingNumber,
 };

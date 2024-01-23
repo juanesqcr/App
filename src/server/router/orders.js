@@ -3,12 +3,13 @@ const {
   getAllOrders,
   registerOrder,
   findByTrackingNumber,
+  deleteOrder,
 } = require("../controllers/Orders");
 
-// TODO: create the middleware
+// TODO: create the middleware de authetificacion
 module.exports = function (router) {
-  console.log("orders router");
   router.get("/orders", getAllOrders);
   router.post("/order/add", registerOrder);
   router.get("/order/trackingNumber", findByTrackingNumber);
+  router.delete("/order/delete", deleteOrder);
 };
