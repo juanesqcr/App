@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-//TODO: Falta agregar que si fue pagado y el precio
+
 const Orderschema = new mongoose.Schema({
   user: [{ type: mongoose.Schema.Types.ObjectId, ref: "User", required: true }],
   description: { type: String, required: true },
@@ -7,6 +7,8 @@ const Orderschema = new mongoose.Schema({
   orderState: { type: String, default: "Pending" },
   deliver: { type: String, default: "On the way" },
   weight: { type: Number, min: 0, max: 999, default: 0 },
+  cancelled: { type: Boolean, default: false },
+  price: { type: Number, min: 0, default: 0 }
 });
 
 const ordersModel = mongoose.model("Orders", Orderschema);

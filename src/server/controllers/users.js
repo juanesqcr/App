@@ -76,7 +76,7 @@ const deleteUser = async (req, res) => {
     }
 
     const deleteUser = await deleteUserbyId(id);
-    return res.status(200).json({ message: 'User deleted successfully' });
+    return res.status(200).json({ message: "User deleted successfully" });
   } catch (error) {
     console.error(error);
     return res.sendStatus(500);
@@ -84,5 +84,30 @@ const deleteUser = async (req, res) => {
 };
 
 //TODO: UPDATE USERS
+const updateUser = async (req, res) => {
+  try {
+    const { id, firstName, lastName, phoneNumber, email, address, password } =
+      req.body;
 
-module.exports = { getAllUsers, register, deleteUser };
+    const existingUser = await getUserById(id);
+    if (!existingUser) {
+      return res.sendStatus(404);
+    }
+
+    existingUser.firstName = firstName;
+    existingUser.lastName = lastName;
+    existingUser.phoneNumber = phoneNumber;
+    existingUser.email = email;
+    existingUser.address = address;
+    existingUser.password = password;
+
+    existingUser.save();
+
+    return res.status(200).json(existingUser).end();
+  } catch (error) {
+    console.log(error);
+    return res.sendStatus(500);
+  }
+};
+
+module.exports = { getAllUsers, register, deleteUser, updateUser };

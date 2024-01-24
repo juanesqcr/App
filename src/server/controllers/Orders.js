@@ -4,6 +4,7 @@ const {
   createOrder,
   getOrderByTrackingNumber,
   deleteOrderByTrackingNumber,
+  getOrderById,
 } = require("../db/order");
 const { getUserById } = require("../db/users");
 const { ReturnDocument } = require("mongodb");
@@ -93,11 +94,53 @@ const deleteOrder = async (req, res) => {
     return res.sendStatus(500);
   }
 };
-//TODO: UPDATE ORDERS
+const updateOrder = async (req, res) => {
+  try {
+    const {
+      id,
+      description,
+      trackingNumber,
+      orderState,
+      deliver,
+      weight,
+      cancelled,
+    } = req.body;
+
+    if (
+      !id ||
+      !description ||
+      !trackingNumber ||
+      !orderState ||
+      !deliver ||
+      !weight ||
+      cancelled == undefined ||
+      cancelled == null 
+    ) {
+      console.log("Data incomplete");
+      return res.sendStatus(404);
+    }
+
+    const order = await getOrderById(id);
+    order.description = description;
+    order.trackingNumber = trackingNumber;
+    order.orderState = orderState;
+    order.deliver = deliver;
+    order.weight = weight;
+    order.cancelled = cancelled;
+
+    await order.save();
+
+    return res.status(200).json(order).end();
+  } catch (error) {
+    console.log(error);
+    return res.sendStatus(500);
+  }
+};
 
 module.exports = {
   getAllOrders,
   registerOrder,
   findByTrackingNumber,
   deleteOrder,
+  updateOrder,
 };
