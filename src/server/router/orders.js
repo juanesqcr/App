@@ -7,11 +7,13 @@ const {
   updateOrder,
 } = require("../controllers/Orders");
 
+const { isAutheticated } = require("../middlewares");
+
 // TODO: create the middleware de authetificacion
 module.exports = function (router) {
-  router.get("/orders", getAllOrders);
-  router.post("/order/add", registerOrder);
-  router.get("/order/trackingNumber", findByTrackingNumber);
-  router.delete("/order/delete", deleteOrder);
-  router.patch("/order/update", updateOrder);
+  router.get("/orders", isAutheticated, getAllOrders);
+  router.post("/order/add", isAutheticated, registerOrder);
+  router.get("/order/trackingNumber", isAutheticated, findByTrackingNumber);
+  router.delete("/order/delete", isAutheticated, deleteOrder);
+  router.patch("/order/update", isAutheticated, updateOrder);
 };

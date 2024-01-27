@@ -18,48 +18,6 @@ const getAllUsers = async (req, res) => {
   }
 };
 
-const register = async (req, res) => {
-  try {
-    const { firstName, lastName, phoneNumber, email, address, password } =
-      req.body;
-
-    if (
-      !firstName ||
-      !lastName ||
-      !phoneNumber ||
-      !email ||
-      !address ||
-      !password
-    ) {
-      return res.sendStatus(400);
-    }
-
-    const existingUser = await getUserbyEmail(email);
-    //TODO: hacer que el correo sea unico
-
-    if (existingUser) {
-      return res.sendStatus(406);
-    }
-
-    const salt = random();
-    const user = await createUser({
-      firstName,
-      lastName,
-      phoneNumber,
-      email,
-      address,
-      authentication: {
-        salt,
-        password: authentication(salt, password),
-      },
-    });
-
-    return res.status(200).json(user).end();
-  } catch (error) {
-    console.error(error);
-    return res.sendStatus(400);
-  }
-};
 
 const deleteUser = async (req, res) => {
   try {
@@ -83,7 +41,6 @@ const deleteUser = async (req, res) => {
   }
 };
 
-//TODO: UPDATE USERS
 const updateUser = async (req, res) => {
   try {
     const { id, firstName, lastName, phoneNumber, email, address, password } =
@@ -110,4 +67,4 @@ const updateUser = async (req, res) => {
   }
 };
 
-module.exports = { getAllUsers, register, deleteUser, updateUser };
+module.exports = { getAllUsers, deleteUser, updateUser };
