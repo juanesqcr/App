@@ -13,7 +13,7 @@ const Orderschema = new mongoose.Schema({
 
 const ordersModel = mongoose.model("Orders", Orderschema);
 
-const getOrders = () => ordersModel.find();
+const getOrders = () => ordersModel.find().populate("user");
 const getOrderById = (id) => ordersModel.findById(id);
 const createOrder = async (orderData) => {
   const order = await new ordersModel(orderData).save();
