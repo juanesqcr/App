@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../styles/allProuctsStyle.css" />
+    <title>ShipStatus CR</title>
+  </head>
+  <body onload="getAllOrders()">
+    <main>
+      <div class="wrapper">
+        <h1>Todos los Productos</h1>
+        <table border="1px">
+          <caption>
+            Lista de todos los productos
+          </caption>
+          <thead>
+            <tr>
+              <th>Usuario</th>
+              <th>Descripcion</th>
+              <th>Tracking Number</th>
+              <th>Estado de la Orden</th>
+              <th>Entregado</th>
+              <th>Peso</th>
+              <th>Precio</th>
+              <th>Fue Cancelado?</th>
+            </tr>
+          </thead>
+          <tbody id="ordersBody">
+
+          </tbody>
+        </table>
+      </div>
+    </main>
+
+    <script src="../scripts/allProductsScript.js"></script>
+  </body>
+</html>

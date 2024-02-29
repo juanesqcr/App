@@ -12,6 +12,7 @@ const { ReturnDocument } = require("mongodb");
 const getAllOrders = async (req, res) => {
   try {
     const orders = await getOrders();
+    console.log(orders);
     return res.status(200).json(orders);
   } catch (error) {
     console.error(error);
@@ -96,6 +97,8 @@ const deleteOrder = async (req, res) => {
 };
 const updateOrder = async (req, res) => {
   try {
+    //TODO: guardar esta variable en la BD
+    const weightPrice = 9;
     const {
       id,
       description,
@@ -114,7 +117,7 @@ const updateOrder = async (req, res) => {
       !deliver ||
       !weight ||
       cancelled == undefined ||
-      cancelled == null 
+      cancelled == null
     ) {
       console.log("Data incomplete");
       return res.sendStatus(404);
@@ -127,6 +130,7 @@ const updateOrder = async (req, res) => {
     order.deliver = deliver;
     order.weight = weight;
     order.cancelled = cancelled;
+    order.price = weight*weightPrice;
 
     await order.save();
 
