@@ -7,6 +7,10 @@ const compression = require("compression");
 const cors = require("cors");
 const mongoose = require("mongoose");
 const router = require("./server/router/index");
+const dotenv = require("dotenv");
+
+dotenv.config();
+
 
 const app = express();
 
@@ -35,7 +39,7 @@ server.listen(8080, () => {
 
 // TODO: delete the URL to the server
 const MONGO_URL =
-  "mongodb+srv://:@shipstatus-cr.gj0ckdy.mongodb.net/?retryWrites=true&w=majority";
+  `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@shipstatus-cr.gj0ckdy.mongodb.net/?retryWrites=true&w=majority`;
 
 mongoose.Promise = Promise;
 mongoose.connect(MONGO_URL);

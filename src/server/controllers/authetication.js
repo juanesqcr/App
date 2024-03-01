@@ -1,8 +1,9 @@
-const {
-  getUserbyEmail,
-  createUser,
-} = require("../db/users");
+const { getUserbyEmail, createUser } = require("../db/users");
 const { authentication, random } = require("../helpers/index");
+const jwt = require("jsonwebtoken");
+const dotenv = require("dotenv");
+
+dotenv.config();
 
 const register = async (req, res) => {
   try {
@@ -76,14 +77,18 @@ const login = async (req, res) => {
     );
     await user.save();
 
-    res.cookie("USER_AUTH", user.authentication.sessionToken, {
-      domain: "localhost",
+    const token = jwt.sign({ userId: user._id }, "your_secret_key_here", {
+      expiresIn: "1h",
+    }); // Cambia 'your_secret_key_here' por tu clave secreta
+
+    const cookieOption = {
+      expires: new Date(
+        Date.now() + process.env.JWT_COOKIE_EXPIRES * 24 * 60 * 60 * 1000
+      ),
       path: "/",
-    });
- 
-    // res.status(200).json(user).end();
-    return res.send({status:"ok",message:"Usuario loggeado",redirect:"/src/client/pages/allProducts.html"});
-     
+    };
+    res.cookie("jwt", token, cookieOption);
+    res.send({ status: "ok", message: "Usuario loggeado", redirect: "/src/client/pages/allProducts.html" });
   } catch (error) {
     console.error(error);
     return res.sendStatus(400);

@@ -25,12 +25,14 @@ form.addEventListener("submit", async (event) => {
       password,
     }),
   });
+  
   const mensajeError = document.getElementsByClassName("escondidoLogin")[0];
 
   if (!res.ok) return mensajeError.classList.toggle("escondidoLogin", false);
   const resJson = await res.json();
-  console.log(resJson);
   if (resJson.redirect) {
-    window.location.href = resJson.redirect;
+    setTimeout(() => {
+      window.location.href = resJson.redirect;
+    }, 300);
   }
 });
