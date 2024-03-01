@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../styles/TableStyle.css" />
+    <title>Your Products</title>
+  </head>
+  <body onload="getPersonProducts()">
+    <main class="wrapper">
+      <h1>Sus Productos</h1>
+      <table border="1px">
+        <caption>
+          Sus productos
+        </caption>
+        <thead>
+          <tr>
+            <th>Usuario</th>
+            <th>Descripcion</th>
+            <th>Tracking Number</th>
+            <th>Estado de la Orden</th>
+            <th>Entregado</th>
+            <th>Peso</th>
+            <th>Precio</th>
+            <th>Fue Cancelado?</th>
+          </tr>
+        </thead>
+        <tbody id="ordersBody"></tbody>
+      </table>
+    </main>
+    <script src="../scripts/ProductPerson.js"></script>
+  </body>
+</html>
