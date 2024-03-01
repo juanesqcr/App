@@ -1,12 +1,36 @@
 const container = document.getElementById("container");
-var LoginBtn = document.getElementById("login");
-var SignInBtn = document.getElementById("sign-in");
+const loginToggleBtn = document.getElementById("login-toggle");
+const signUpToggleBtn = document.getElementById("sign-up-toggle");
 
-LoginBtn.addEventListener('click', () => {
-    container.classList.add("active");
+loginToggleBtn.addEventListener("click", () => {
+  container.classList.add("active");
 });
 
-SignInBtn.addEventListener("click", () => {
-    container.classList.remove("active");
+signUpToggleBtn.addEventListener("click", () => {
+  container.classList.remove("active");
+});
+
+const form = document.querySelector(".container-sign-in form");
+
+form.addEventListener("submit", async (event) => {
+  event.preventDefault(); // Evita que el formulario se envíe normalmente
+  const email = event.target.children.email.value;
+  const password = event.target.children.password.value;
+
+  const res = await fetch("http://localhost:8080/auth/login", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      email,
+      password,
+    }),
   });
-  
+  const mensajeError = document.getElementsByClassName("escondidoLogin")[0];
+
+  if (!res.ok) return mensajeError.classList.toggle("escondidoLogin", false);
+  const resJson = await res.json();
+  console.log(resJson);
+  if (resJson.redirect) {
+    window.location.href = resJson.redirect;
+  }
+});

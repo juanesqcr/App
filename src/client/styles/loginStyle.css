@@ -27,7 +27,7 @@ body {
   min-height: 480px;
 }
 
-.container form {
+.container .container-sign {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -71,8 +71,12 @@ body {
   cursor: pointer;
 }
 
-.container form button{
+.container form button {
   margin-top: 10px;
+}
+
+.container form {
+  text-align: center;
 }
 
 .forms {
@@ -81,28 +85,24 @@ body {
   z-index: 2;
 }
 
-.toggle{
-  height: ;
+.container-toggle {
+  background: linear-gradient(to right, #5652b7, #4e3aa1);
+  position: absolute;
+  top: 0;
+  left: 50%;
+  height: 100%;
+  border-radius: 150px 0 0 100px;
+  color: #fff;
+  overflow: hidden;
+  display: flex;
+  justify-content: flex-end;
+  align-content: center;
+  flex-wrap: wrap;
+  transition: all 0.8s ease-in-out;
+  transform: translateX(0);
 }
 
-.container-toggle{
-    background: linear-gradient(to right,#5652B7,#4E3AA1);
-    position: absolute;
-    top: 0;
-    left: 50%;
-    height: 100%;
-    border-radius: 150px 0 0 100px;
-    color: #fff;
-    overflow: hidden;
-    display: flex;
-    justify-content: flex-end;
-    align-content: center;
-    flex-wrap: wrap;
-    transition: all 0.8s ease-in-out;
-    transform: translateX(0);
-}
-
-.toggle-panel{
+.toggle-panel {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -111,45 +111,59 @@ body {
   padding: 0 20px;
 }
 
-.togle-right{
+.toggle-right {
   transition: all 0.8s ease-in-out;
 }
 
-.toggle-panel p{
- margin: 40px 0;
+.toggle-panel p {
+  margin: 40px 0;
 }
 
-.togle-left{
-    transform: translateX(-380px);
-    transition: all 0.8s ease-in-out;
-    position: absolute;
-    top: 36%;
+.toggle-left {
+  transform: translateX(-380px);
+  transition: all 0.8s ease-in-out;
+  position: absolute;
+  top: 36%;
 }
 
-.container-sing-in{
+.container-sign-in {
+  position: relative;
   transform: translateX(400px);
   transition: all 0.8s ease-in-out;
 }
 
-.container.active .container-sing-in{
+.login-txt {
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+}
+
+.container.active .container-sign-in {
   transform: translateX(0);
-} 
-
-.container.active .togle-left{
-  transform: translateX(0); 
 }
 
-.container.active .togle-right{
+.container.active .toggle-left {
+  transform: translateX(0);
+}
+
+.container.active .toggle-right {
   transform: translateX(400px);
 }
 
-.container.active .container-toggle{
+.escondidoLogin {
+  display: none;
+}
+
+.escondidoSignUp {
+  display: none;
+}
+
+.error {
+  color: red;
+}
+
+.container.active .container-toggle {
   transform: translateX(-100%);
   border-radius: 0 150px 100px 0;
   transition: all 0.8s ease-in-out;
-
 }
-
-
-
-

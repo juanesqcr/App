@@ -5,6 +5,7 @@ const {
   getOrderByTrackingNumber,
   deleteOrderByTrackingNumber,
   getOrderById,
+  getOrdersByUser
 } = require("../db/order");
 const { getUserById } = require("../db/users");
 const { ReturnDocument } = require("mongodb");
@@ -73,6 +74,32 @@ const findByTrackingNumber = async (req, res) => {
   } catch (error) {
     console.log(error);
     return res.sendStatus(500);
+  }
+};
+
+const getOrdersByUserId = async (req, res) => {
+  try {
+    const { userId } = req.body; // Obtiene el ID del usuario del cuerpo de la solicitud
+
+    if (!userId) {
+      // Si no se proporciona un ID de usuario en el cuerpo, devuelve un error 400
+      return res.status(400).json({ message: 'Se requiere un ID de usuario' });
+    }
+
+    // Llama a la función para obtener las órdenes por ID de usuario
+    const orders = await getOrdersByUser(userId);
+
+    if (!orders) {
+      // Si no se encuentran órdenes para el usuario, devuelve un error 404
+      return res.status(404).json({ message: 'No se encontraron órdenes para este usuario' });
+    }
+
+    // Si se encuentran órdenes, devuelve las órdenes asociadas al usuario
+    return res.status(200).json(orders);
+  } catch (error) {
+    // Si ocurre un error, devuelve un error 500
+    console.error('Error al obtener órdenes por usuario:', error);
+    return res.status(500).json({ message: 'Error del servidor' });
   }
 };
 
@@ -145,6 +172,7 @@ module.exports = {
   getAllOrders,
   registerOrder,
   findByTrackingNumber,
+  getOrdersByUserId,
   deleteOrder,
   updateOrder,
 };
