@@ -13,71 +13,69 @@
   <body>
     <div class="container" id="container">
       <div class="forms">
-        
-        <section class="container-sign-up">
+        <!-- Sección para registrarse -->
+        <section class="container-sign container-sign-up">
+          <h1>Create an Account</h1>
+          <div class="socials">
+            <!-- <a href="http://facebook.com"><i class="fa-brands fa-square-facebook"></i></a> -->
+            <!-- <a href="http://facebook.com"><i class="fa-brands fa-square-x-twitter"></i></a> -->
+          </div>
+          <p>or use your email for registration</p>
           <form>
-            <h1>Create an Account</h1>
-            <div class="socials">
-              <a href="http://facebook.com"
-                ><i class="fa-brands fa-square-facebook"></i
-              ></a>
-              <a href="http://facebook.com"
-                ><i class="fa-brands fa-square-x-twitter"></i
-              ></a>
-            </div>
-            <p>or use your email for registration</p>
             <input type="text" placeholder="Name" />
             <input type="email" placeholder="Email" />
             <input type="password" placeholder="Password" />
-            <button>sign up</button>
+            <button type="submit">Sign Up</button>
+            <p class="error escondidoSignUp">Error al iniciar sesión</p>
           </form>
         </section>
 
-
-        <section class="container-sing-in">
-          <form>
+        <!-- Sección para iniciar sesión -->
+        <section class="container-sign container-sign-in">
+          <div class="login-txt">
             <h1>Sign In</h1>
             <div class="socials">
-              <a href="http://facebook.com"
-                ><i class="fa-brands fa-square-facebook"></i
-              ></a>
-              <a href="http://facebook.com"
-                ><i class="fa-brands fa-square-x-twitter"></i
-              ></a>
+              <!-- <a href="http://facebook.com"><i class="fa-brands fa-square-facebook"></i></a> -->
+              <!-- <a href="http://facebook.com"><i class="fa-brands fa-square-x-twitter"></i></a> -->
             </div>
             <p>or use your email to sign in</p>
-            <input type="text" placeholder="Email" />
-            <input type="password" placeholder="Password" />
-            <button>Login</button>
+          </div>
+          <form>
+            <input type="email" placeholder="Email" name="email" id="email" />
+            <input
+              type="password"
+              placeholder="Password"
+              name="password"
+              id="password"
+            />
+            <button type="submit" id="login">Login</button>
+            <p class="error escondidoLogin">Error al iniciar sesión</p>
           </form>
         </section>
       </div>
 
+      <!-- Sección de cambio entre registro e inicio de sesión -->
       <section class="container-toggle" id="container-toggle">
         <div class="toggle">
-
-          <div class="toggle-panel togle-right">
+          <div class="toggle-panel toggle-right">
             <h1>Welcome!</h1>
             <p>
               Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iure
               optio assumenda tempore illo fugit voluptatum!
             </p>
-            <button id="login">Login</button>
+            <button id="login-toggle">Login</button>
           </div>
-
-          <div class="toggle-panel togle-left">
+          <div class="toggle-panel toggle-left">
             <h1>Welcome Back!</h1>
             <p>
               Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eos,
               quas.
             </p>
-            <button id="sign-in">Sign Up</button>
+            <button id="sign-up-toggle">Sign Up</button>
           </div>
-
         </div>
       </section>
     </div>
-
-    <script src="./loginScript.js"></script>
+    <script src="../scripts/loginScript.js"></script>
   </body>
 </html>
