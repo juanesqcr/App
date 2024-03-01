@@ -80,9 +80,10 @@ const login = async (req, res) => {
       domain: "localhost",
       path: "/",
     });
-
-    return res.send({status:"ok",message:"Usuario loggeado",redirect:"/src/client/pages/allProducts.html"}).status(200).json(user).end();
-
+ 
+    // res.status(200).json(user).end();
+    return res.send({status:"ok",message:"Usuario loggeado",redirect:"/src/client/pages/allProducts.html"});
+     
   } catch (error) {
     console.error(error);
     return res.sendStatus(400);
