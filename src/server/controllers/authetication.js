@@ -18,7 +18,8 @@ const register = async (req, res) => {
       !address ||
       !password
     ) {
-      return res.sendStatus(400);
+      return res.status(400).send("Faltan cosas en la solicitud.");
+
     }
 
     const existingUser = await getUserbyEmail(email);

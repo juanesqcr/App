@@ -1,81 +1,81 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
-    />
-    <link rel="stylesheet" href="../styles/loginStyle.css" />
-    <title>Login</title>
-  </head>
-  <body>
-    <div class="container" id="container">
-      <div class="forms">
-        <!-- Sección para registrarse -->
-        <section class="container-sign container-sign-up">
-          <h1>Create an Account</h1>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+  <link rel="stylesheet" href="../styles/loginStyle.css" />
+  <title>Login</title>
+</head>
+
+<body>
+  <div class="container" id="container">
+    <div class="forms">
+      <!-- Sección para registrarse -->
+      <section class="container-sign container-sign-up">
+        <h1>Create an Account</h1>
+        <div class="socials">
+          <!-- <a href="http://facebook.com"><i class="fa-brands fa-square-facebook"></i></a> -->
+          <!-- <a href="http://facebook.com"><i class="fa-brands fa-square-x-twitter"></i></a> -->
+        </div>
+        <p>or use your email for registration</p>
+        <form>
+          <input type="text" placeholder="Name" name="name" id="name" />
+          <input type="text" placeholder="Last Name" name="lastName" id="lastName" />
+          <input type="number" placeholder="Phone Number" name="phoneNumber" id="phoneNumber" />
+          <input type="email" placeholder="Email" name="emailRegister" id="emailRegister" />
+          <input type="text" placeholder="Address" name="address" id="address" />
+          <input type="password" placeholder="Password" name="passwordRegister" id="passwordRegister" />
+          <button type="submit" id="signUpBtn">Sign Up</button>
+          <p class="error escondidoSignUp">Usuario ya existe</p>
+        </form>
+      </section>
+
+      <!-- Sección para iniciar sesión -->
+      <section class="container-sign container-sign-in">
+        <div class="login-txt">
+          <h1>Sign In</h1>
           <div class="socials">
             <!-- <a href="http://facebook.com"><i class="fa-brands fa-square-facebook"></i></a> -->
             <!-- <a href="http://facebook.com"><i class="fa-brands fa-square-x-twitter"></i></a> -->
           </div>
-          <p>or use your email for registration</p>
-          <form>
-            <input type="text" placeholder="Name" />
-            <input type="email" placeholder="Email" />
-            <input type="password" placeholder="Password" />
-            <button type="submit">Sign Up</button>
-            <p class="error escondidoSignUp">Error al iniciar sesión</p>
-          </form>
-        </section>
-
-        <!-- Sección para iniciar sesión -->
-        <section class="container-sign container-sign-in">
-          <div class="login-txt">
-            <h1>Sign In</h1>
-            <div class="socials">
-              <!-- <a href="http://facebook.com"><i class="fa-brands fa-square-facebook"></i></a> -->
-              <!-- <a href="http://facebook.com"><i class="fa-brands fa-square-x-twitter"></i></a> -->
-            </div>
-            <p>or use your email to sign in</p>
-          </div>
-          <form>
-            <input type="email" placeholder="Email" name="email" id="email" />
-            <input
-              type="password"
-              placeholder="Password"
-              name="password"
-              id="password"
-            />
-            <button type="submit" id="login">Login</button>
-            <p class="error escondidoLogin">Error al iniciar sesión</p>
-          </form>
-        </section>
-      </div>
-
-      <!-- Sección de cambio entre registro e inicio de sesión -->
-      <section class="container-toggle" id="container-toggle">
-        <div class="toggle">
-          <div class="toggle-panel toggle-right">
-            <h1>Welcome!</h1>
-            <p>
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iure
-              optio assumenda tempore illo fugit voluptatum!
-            </p>
-            <button id="login-toggle">Login</button>
-          </div>
-          <div class="toggle-panel toggle-left">
-            <h1>Welcome Back!</h1>
-            <p>
-              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eos,
-              quas.
-            </p>
-            <button id="sign-up-toggle">Sign Up</button>
-          </div>
+          <p>or use your email to sign in</p>
         </div>
+        <form>
+          <input type="email" placeholder="Email" name="email" id="email" />
+          <input type="password" placeholder="Password" name="password" id="password" />
+
+          <button type="submit" id="login">Login</button>
+          <p class="escondidoSuccess">Su cuenta ha sido creada!!</p>
+          <p class="error escondidoLogin">Error al iniciar sesión</p>
+        </form>
       </section>
     </div>
-    <script src="../scripts/loginScript.js"></script>
-  </body>
+
+    <!-- Sección de cambio entre registro e inicio de sesión -->
+    <section class="container-toggle" id="container-toggle">
+      <div class="toggle">
+        <div class="toggle-panel toggle-right">
+          <h1>Welcome!</h1>
+          <p>
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iure
+            optio assumenda tempore illo fugit voluptatum!
+          </p>
+          <button id="login-toggle">Login</button>
+        </div>
+        <div class="toggle-panel toggle-left">
+          <h1>Welcome Back!</h1>
+          <p>
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eos,
+            quas.
+          </p>
+          <button id="sign-up-toggle">Sign Up</button>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script src="../scripts/loginScript.js"></script>
+</body>
+
 </html>
